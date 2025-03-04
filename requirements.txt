@@ -1,3 +1,7 @@
 scikit-learn
 python-dotenv
 numpy
+pymongo
+certifi
+
+#-e .
