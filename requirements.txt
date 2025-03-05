@@ -3,5 +3,6 @@ python-dotenv
 numpy
 pymongo
 certifi
-
+kaggle
+pandas
 #-e .
