@@ -17,7 +17,7 @@ def download_data(dataset_identifier,save_path="Data"):
 class DetectionDataExtract:
     def __init__(self):
         try:
-            logger.info("Downloaded Credit Card Fraud Dataset file")
+            logger.logging.info("Downloaded Credit Card Fraud Dataset file")
             download_data("mlg-ulb/creditcardfraud")
         except Exception as e:
             raise FraudDetectionException(e,sys)
@@ -50,6 +50,6 @@ if __name__=="__main__":
     Collection="FraudDetectionData"
     detectionobj=DetectionDataExtract()
     records=detectionobj.convert_csv_to_json(FILE_PATH)
-    print(records)
+    #print(records)
     no_of_records=detectionobj.insert_data_to_mongodb(records=records,database=DATABASE,collection=Collection)
     print(no_of_records)
