@@ -37,8 +37,15 @@ class DataTransformation:
 
             #scaling data
             scaler=StandardScaler()
-            train_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE]=scaler.fit_transform(train_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE])
-            test_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE] = scaler.transform(test_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE])
+            
+            # Ensure train_data_unique and test_data_unique are copies to avoid SettingWithCopyWarning
+            train_data_unique = train_data_unique.copy()
+            test_data_unique = test_data_unique.copy()
+
+            # Apply scaling
+            train_data_unique.loc[:, DATA_TRANSFORMATION_COLUMN_TO_SCALE] = scaler.fit_transform(train_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE])
+            test_data_unique.loc[:, DATA_TRANSFORMATION_COLUMN_TO_SCALE] = scaler.transform(test_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE])
+
 
             dir_path=os.path.dirname(self.data_transformation_config.transformed_train_file_path)
             os.makedirs(dir_path,exist_ok=True)

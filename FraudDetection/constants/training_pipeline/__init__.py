@@ -18,6 +18,7 @@ SCHEMA_FILE_DIR="data_schema"
 SCHEMA_FILE_PATH=os.path.join("data_schema","schema.yaml")
 
 PREPROCESSING_OBJECT_FILE_NAME="preprocessing.pkl"
+SAVED_MODEL_DIR=os.path.join("saved_models")
 
 '''
 Data Ingestion related constant start with DATA_INGESTION VAR NAME
@@ -46,3 +47,14 @@ Data Transformation related constant
 DATA_TRANSFORMATION_DIR_NAME:str="data_transformation"
 DATA_TRANSFORMED_DIR:str="transformed"
 DATA_TRANSFORMATION_COLUMN_TO_SCALE=['Time','Amount']
+
+
+"""
+Model Trainer related constant starts with MODEL_TRAINER var name
+"""
+
+MODEL_TRAINER_DIR_NAME:str="Model Trainer"
+MODEL_TRAINER_TRAINED_MODEL_DIR:str="Trained Model"
+MODEL_TRAINER_FILENAME:str="Model.pkl"
+MODEL_TRAINER_EXPECTED_G_MEAN_SCORE:float=0.6
+MODEL_TRAINER_OVERFITTING_UNDERFITTING_THRESHOLD=0.05

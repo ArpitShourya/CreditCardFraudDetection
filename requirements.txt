@@ -6,4 +6,7 @@ certifi
 kaggle
 pandas
 pyyaml
+imblearn
+xgboost
+mlflow
 #-e .

@@ -1,4 +1,4 @@
-import yaml,os,sys,numpy as np,pickle
+import yaml,os,sys,numpy as np,pickle,pandas as pd
 from FraudDetection.exception.exception import FraudDetectionException
 from FraudDetection.logging.logger import logging
 
@@ -26,6 +26,12 @@ def save_numpy_array_data(file_path:str, array:np.array):
     except Exception as e:
         raise FraudDetectionException(e,sys)
     
+def get_data(file_path:str):
+    try:
+        return pd.read_csv(file_path)
+    except Exception as e:
+        raise FraudDetectionException(e,sys)
+    
 def save_object(file_path:str,obj:object):
     try:
         logging.info("Entered the save_object Method")
@@ -33,5 +39,14 @@ def save_object(file_path:str,obj:object):
         with open(file_path,"wb") as file_obj:
             pickle.dump(obj, file_obj)
         logging.info("Exited the save_object method")
+    except Exception as e:
+        raise FraudDetectionException(e,sys)
+    
+def load_object(file_path:str):
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"The path {file_path} doesn't exist")
+        with open(file_path,"rb") as obj:
+            return pickle.load(obj)
     except Exception as e:
         raise FraudDetectionException(e,sys)

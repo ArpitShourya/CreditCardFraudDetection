@@ -83,4 +83,16 @@ class DataTransformationConfig:
         self.data_transformation_dir=os.path.join(training_pipeline_config.artifact_dir,training_pipeline.DATA_TRANSFORMATION_DIR_NAME)
         self.transformed_train_file_path=os.path.join(self.data_transformation_dir,training_pipeline.DATA_TRANSFORMED_DIR,training_pipeline.TRAIN_FILE_NAME)
         self.transformed_test_file_path=os.path.join(self.data_transformation_dir,training_pipeline.DATA_TRANSFORMED_DIR,training_pipeline.TEST_FILE_NAME)
+
+
+class ModelTrainerConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_trainer_dir=os.path.join(
+            training_pipeline_config.artifact_dir,training_pipeline.MODEL_TRAINER_DIR_NAME
+            )
+        self.trained_model_file_path=os.path.join(self.model_trainer_dir,training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR,
+                                                  training_pipeline.MODEL_TRAINER_FILENAME)
+        self.expected_G_Mean=training_pipeline.MODEL_TRAINER_EXPECTED_G_MEAN_SCORE
+        self.overfitting_underfitting_threshold=training_pipeline.MODEL_TRAINER_OVERFITTING_UNDERFITTING_THRESHOLD
+
         
