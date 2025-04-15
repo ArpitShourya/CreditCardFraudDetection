@@ -1,0 +1,9 @@
+[ 2025-04-15 10:06:57,256 ] 395 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+[ 2025-04-15 10:06:57,260 ] 614 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+[ 2025-04-15 10:06:57,260 ] 456 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+[ 2025-04-15 10:06:57,262 ] 118 kafka.coordinator.consumer - WARNING - group_id is None: disabling auto-commit.
+[ 2025-04-15 10:06:57,263 ] 182 kafka.consumer.subscription_state - INFO - Updating subscribed topics to: ('credit_card_transactions',)
+[ 2025-04-15 10:06:58,696 ] 254 kafka.consumer.subscription_state - INFO - Updated partition assignment: [TopicPartition(topic='credit_card_transactions', partition=0), TopicPartition(topic='credit_card_transactions', partition=1), TopicPartition(topic='credit_card_transactions', partition=2)]
+[ 2025-04-15 10:06:58,698 ] 395 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=0 host=DESKTOP-94Q8MS5:9092 <connecting> [IPv6 ('fe80::841f:c6b5:37b5:7e2c', 9092, 0, 13)]>: connecting to DESKTOP-94Q8MS5:9092 [('fe80::841f:c6b5:37b5:7e2c', 9092, 0, 13) IPv6]
+[ 2025-04-15 10:06:58,698 ] 456 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=0 host=DESKTOP-94Q8MS5:9092 <connected> [IPv6 ('fe80::841f:c6b5:37b5:7e2c', 9092, 0, 13)]>: Connection complete.
+[ 2025-04-15 10:06:58,699 ] 935 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 

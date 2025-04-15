@@ -2,11 +2,14 @@ from FraudDetection.components.data_ingestion import DataIngestion
 from FraudDetection.components.data_validation import DataValidation
 from FraudDetection.components.data_transformation import DataTransformation
 from FraudDetection.components.model_trainer import ModelTrainer
+from FraudDetection.components.kafka_producer import KafkaProducerService
+from FraudDetection.components.kafka_consumer import KafkaConsumerService
+from FraudDetection.utils.ml_utils.model.estimator import FraudDetectionModel
 from FraudDetection.exception.exception import FraudDetectionException
 from FraudDetection.logging.logger import logging
 from FraudDetection.entity.config_entity import DataIngestionConfig,TrainingPipelineConfig,DataValidationConfig,DataTransformationConfig,ModelTrainerConfig
 
-import sys
+import sys,threading
 
 if __name__=="__main__":
     try:
@@ -36,6 +39,18 @@ if __name__=="__main__":
         model_trainer_artifact=model_trainer.initiate_model_training()
         logging.info("Model Trianing Completed")
 
-        print(model_trainer_artifact)
+        # Kafka Streaming (Run Producer & Consumer in Parallel)
+        producer = KafkaProducerService()
+        consumer = KafkaConsumerService()
+
+        # Run Kafka Producer & Consumer in Threads
+        producer_thread = threading.Thread(target=producer.stream_data, args=("Data/creditcard.csv",))
+        consumer_thread = threading.Thread(target=consumer.detect_fraud)
+
+        producer_thread.start()
+        consumer_thread.start()
+
+        producer_thread.join()
+        consumer_thread.join()
     except Exception as e:
         raise FraudDetectionException(e,sys)

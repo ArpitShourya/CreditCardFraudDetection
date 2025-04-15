@@ -47,6 +47,8 @@ Data Transformation related constant
 DATA_TRANSFORMATION_DIR_NAME:str="data_transformation"
 DATA_TRANSFORMED_DIR:str="transformed"
 DATA_TRANSFORMATION_COLUMN_TO_SCALE=['Time','Amount']
+DATA_TRANSFORMATION_MODEL_DIR="Preprocessing model"
+DATA_TRANSFORMATION_MODEL_NAME="preprocessing.pkl"
 
 
 """

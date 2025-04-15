@@ -11,12 +11,12 @@ class FraudDetectionModel(mlflow.pyfunc.PythonModel):
         except Exception as e:
             raise FraudDetectionException(e,sys)
         
-    def predict(self,context):
+    def predict(self,X):
         try:
             xgb_model = self.model["xgb_model"]
             iso_forest = self.model["iso_forest"]
-            y_pred_xgb = xgb_model.predict(context)  # XGBoost probability for fraud
-            y_pred_iso = iso_forest.predict(context) # Isolation Forest predictions
+            y_pred_xgb = xgb_model.predict(X)  # XGBoost probability for fraud
+            y_pred_iso = iso_forest.predict(X) # Isolation Forest predictions
 
             # Convert Isolation Forest output (-1 = fraud, 1 = normal) to (1 = fraud, 0 = normal)
             y_pred_iso = np.where(y_pred_iso == -1, 1, 0)

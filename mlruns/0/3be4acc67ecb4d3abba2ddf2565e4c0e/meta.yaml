@@ -1,0 +1,15 @@
+artifact_uri: file:///E:/ETE%20FraudDetection%20Project/mlruns/0/3be4acc67ecb4d3abba2ddf2565e4c0e/artifacts
+end_time: 1743412220153
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3be4acc67ecb4d3abba2ddf2565e4c0e
+run_name: funny-ape-109
+run_uuid: 3be4acc67ecb4d3abba2ddf2565e4c0e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743412212453
+status: 3
+tags: []
+user_id: PC

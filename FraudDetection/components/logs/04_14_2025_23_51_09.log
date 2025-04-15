@@ -1,0 +1,1 @@
+[ 2025-04-14 23:51:39,675 ] 395 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]

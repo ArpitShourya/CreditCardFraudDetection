@@ -1,0 +1,5 @@
+[ 2025-04-15 00:24:28,703 ] 395 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+[ 2025-04-15 00:24:28,708 ] 614 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+[ 2025-04-15 00:24:28,708 ] 456 kafka.conn - INFO - <BrokerConnection client_id=kafka-python-2.1.4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+[ 2025-04-15 00:24:28,709 ] 118 kafka.coordinator.consumer - WARNING - group_id is None: disabling auto-commit.
+[ 2025-04-15 00:24:28,711 ] 182 kafka.consumer.subscription_state - INFO - Updating subscribed topics to: ('credit_card_transactions',)

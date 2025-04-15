@@ -3,6 +3,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from FraudDetection.exception.exception import FraudDetectionException
 from FraudDetection.logging.logger import logging
+from FraudDetection.utils.main_utils.utils import save_object
 from FraudDetection.entity.artifact_entity import DataTransformationArtifact,DataValidationArtifact
 from FraudDetection.entity.config_entity import DataTransformationConfig
 from FraudDetection.utils.main_utils.utils import save_numpy_array_data,save_object
@@ -45,6 +46,9 @@ class DataTransformation:
             # Apply scaling
             train_data_unique.loc[:, DATA_TRANSFORMATION_COLUMN_TO_SCALE] = scaler.fit_transform(train_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE])
             test_data_unique.loc[:, DATA_TRANSFORMATION_COLUMN_TO_SCALE] = scaler.transform(test_data_unique[DATA_TRANSFORMATION_COLUMN_TO_SCALE])
+
+            save_object(self.data_transformation_config.preprocess_model_file_path,scaler)
+
 
 
             dir_path=os.path.dirname(self.data_transformation_config.transformed_train_file_path)

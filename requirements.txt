@@ -9,4 +9,8 @@ pyyaml
 imblearn
 xgboost
 mlflow
+fastapi
+uvicorn
+kafka
+kafka-python
 #-e .

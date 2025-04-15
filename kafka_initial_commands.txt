@@ -1,0 +1,6 @@
+Zookeeper: bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+Server: bin\windows\kafka-server-start.bat config\server.properties
+Create Topic: bin\windows\kafka-topics.bat --create --topic credit_card_transactions --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+list all topic: bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+stop kafka : bin\windows\kafka-server-stop.bat
+stop zookeeper: bin\windows\zookeeper-server-stop.bat
