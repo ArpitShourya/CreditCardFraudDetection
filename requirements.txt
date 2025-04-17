@@ -13,4 +13,5 @@ fastapi
 uvicorn
 kafka
 kafka-python
+faust-streaming
 #-e .

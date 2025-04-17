@@ -41,16 +41,16 @@ if __name__=="__main__":
 
         # Kafka Streaming (Run Producer & Consumer in Parallel)
         producer = KafkaProducerService()
-        consumer = KafkaConsumerService()
+        #consumer = KafkaConsumerService()
 
         # Run Kafka Producer & Consumer in Threads
         producer_thread = threading.Thread(target=producer.stream_data, args=("Data/creditcard.csv",))
-        consumer_thread = threading.Thread(target=consumer.detect_fraud)
+        #consumer_thread = threading.Thread(target=consumer.detect_fraud)
 
         producer_thread.start()
-        consumer_thread.start()
+        #consumer_thread.start()
 
         producer_thread.join()
-        consumer_thread.join()
+        #consumer_thread.join()
     except Exception as e:
         raise FraudDetectionException(e,sys)
