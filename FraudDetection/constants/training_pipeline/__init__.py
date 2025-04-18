@@ -7,6 +7,10 @@ PIPELINE_NAME="FraudDetection"
 ARTIFACT_DIR="Artifacts"
 FILE_NAME="creditcard.csv"
 
+EMAIL_ADDRESS = "arpitshourya2233@gmail.com"
+TO_EMAIL = "arpitshourya2233@gmail.com"
+
+
 TRAIN_FILE_NAME="train.csv"
 TEST_FILE_NAME="test.csv"
 #X_TRAIN_FILE_NAME="X_train.csv"

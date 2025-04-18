@@ -14,16 +14,15 @@ class KafkaProducerService:
 
     def stream_data(self, data_path):
         df = pd.read_csv(data_path)
-        base_time = datetime(2025, 4, 17, 0, 0, 0)
-        count = 0
+        base_time = datetime.now()
 
         for _, row in df.iterrows():
             # Convert relative Time to absolute datetime
             event_time = base_time + timedelta(seconds=row["Time"])
 
             transaction = {
-                "event_time": event_time.isoformat(),  # <-- For Flink event time
-                "Time": row["Time"],                   # Scaled as a feature
+                "event_time": event_time.isoformat(),  
+                "Time": row["Time"],                   
                 "features": row.iloc[1:29].tolist(),
                 "Amount": row["Amount"]
             }
@@ -31,10 +30,7 @@ class KafkaProducerService:
             self.producer.send(self.topic, value=transaction)
             print(f"Sent: {transaction}")
 
-            count += 1
-            if count == 11:
-                break
-
+            
             time.sleep(1)  # simulate real-time
 
 if __name__ == "__main__":

@@ -1,6 +1,14 @@
 import yaml,os,sys,numpy as np,pickle,pandas as pd
 from FraudDetection.exception.exception import FraudDetectionException
 from FraudDetection.logging.logger import logging
+from FraudDetection.constants.training_pipeline import EMAIL_ADDRESS,TO_EMAIL
+import smtplib
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
+load_dotenv()
+
+email_pass=os.getenv("GOOGLE_EMAIL_PASS")
+
 
 def create_yaml(path,*args):
     try:
@@ -50,3 +58,22 @@ def load_object(file_path:str):
             return pickle.load(obj)
     except Exception as e:
         raise FraudDetectionException(e,sys)
+    
+
+EMAIL_ADDRESS = EMAIL_ADDRESS
+EMAIL_PASSWORD = email_pass
+TO_EMAIL = TO_EMAIL
+
+def send_email_alert(subject, body):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = EMAIL_ADDRESS
+    msg['To'] = TO_EMAIL
+
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+        print("✅ Email alert sent successfully!")
+    except Exception as e:
+        print("❌ Failed to send email:", e)

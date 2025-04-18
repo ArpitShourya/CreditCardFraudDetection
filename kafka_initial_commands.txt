@@ -4,3 +4,5 @@ Create Topic: bin\windows\kafka-topics.bat --create --topic credit_card_transact
 list all topic: bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 stop kafka : bin\windows\kafka-server-stop.bat
 stop zookeeper: bin\windows\zookeeper-server-stop.bat
+faust_run_command: faust -A faust_app worker -l info
+

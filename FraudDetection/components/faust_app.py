@@ -3,6 +3,8 @@ import joblib
 import pandas as pd
 from FraudDetection.entity.config_entity import TrainingPipelineConfig, ModelTrainerConfig, DataTransformationConfig
 from FraudDetection.utils.ml_utils.model.estimator import FraudDetectionModel
+from FraudDetection.utils.main_utils.utils import send_email_alert
+
 
 # Load preprocessor and model
 trainingpipelineconfig = TrainingPipelineConfig()
@@ -46,10 +48,11 @@ async def detect_fraud(transactions):
             ]
             df = pd.DataFrame([features], columns=columns)
             
-
             prediction = fraud_model.predict(df)[0]
             if prediction == 1:
                 print(f"🚨 FRAUD DETECTED: {tx}")
+                message = f"🚨 FRAUD ALERT!\nAmount: {tx.Amount} dollars \nTime : {tx.Time} seconds"
+                send_email_alert("🚨 FRAUD DETECTED", message)
             else:
                 print(f"✅ Legit Transaction: {tx}")
         except Exception as e:
