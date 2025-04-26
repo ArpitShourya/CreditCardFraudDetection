@@ -19,7 +19,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Login to Amazon ECR (important, outside SSH)
+    - name: Login to Amazon ECR (before SSH)
       run: |
         aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_LOGIN_URI }}
 
@@ -44,15 +44,13 @@ jobs:
           if [ ! -d "CreditCardFraudDetection" ]; then
             echo "Repo not found! Cloning repository..."
             git clone https://github.com/ArpitShourya/CreditCardFraudDetection.git
+            cd CreditCardFraudDetection
           else
             echo "Repo already exists! Pulling latest changes..."
             cd CreditCardFraudDetection
             git pull origin main
           fi
-          cd CreditCardFraudDetection
-          git pull origin main
 
-          
           echo "AWS_ECR_LOGIN_URI=${{ secrets.AWS_ECR_LOGIN_URI }}" > .env
           echo "ECR_FASTAPI_REPOSITORY=${{ secrets.ECR_FASTAPI_REPOSITORY }}" >> .env
           echo "ECR_FAUST_REPOSITORY=${{ secrets.ECR_FAUST_REPOSITORY }}" >> .env
