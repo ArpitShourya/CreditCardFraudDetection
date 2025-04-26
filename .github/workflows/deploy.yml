@@ -50,6 +50,8 @@ jobs:
             git pull origin main
           fi
           cd CreditCardFraudDetection
+          git pull origin main
+
           
           echo "AWS_ECR_LOGIN_URI=${{ secrets.AWS_ECR_LOGIN_URI }}" > .env
           echo "ECR_FASTAPI_REPOSITORY=${{ secrets.ECR_FASTAPI_REPOSITORY }}" >> .env
