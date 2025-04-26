@@ -43,7 +43,7 @@ jobs:
           cd /home/ubuntu
           if [ ! -d "CreditCardFraudDetection" ]; then
             echo "Repo not found! Cloning repository..."
-            git clone https://github.com/your-username/CreditCardFraudDetection.git
+            git clone https://github.com/ArpitShourya/CreditCardFraudDetection.git
           else
             echo "Repo already exists! Pulling latest changes..."
             cd CreditCardFraudDetection
