@@ -1,4 +1,4 @@
-name: Deploy to AWS EC2 with ECR
+name: Deploy to AWS EC2 with ECR Auto-Clone
 
 on:
   push:
@@ -40,8 +40,16 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd /home/ubuntu/CreditCardFraudDetection
-          git pull origin main
+          cd /home/ubuntu
+          if [ ! -d "CreditCardFraudDetection" ]; then
+            echo "Repo not found! Cloning repository..."
+            git clone https://github.com/ArpitShourya/CreditCardFraudDetection.git
+          else
+            echo "Repo already exists! Pulling latest changes..."
+            cd CreditCardFraudDetection
+            git pull origin main
+          fi
+          cd CreditCardFraudDetection
           docker-compose pull
           docker-compose down
           docker-compose up -d
