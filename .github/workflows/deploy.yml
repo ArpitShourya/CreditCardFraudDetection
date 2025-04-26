@@ -50,6 +50,11 @@ jobs:
             git pull origin main
           fi
           cd CreditCardFraudDetection
+
+          # Create .env file dynamically from GitHub Secrets
+          echo "AWS_ECR_LOGIN_URI=${{ secrets.AWS_ECR_LOGIN_URI }}" > .env
+          echo "ECR_FASTAPI_REPOSITORY=${{ secrets.ECR_FASTAPI_REPOSITORY }}" >> .env
+          echo "ECR_FAUST_REPOSITORY=${{ secrets.ECR_FAUST_REPOSITORY }}" >> .env
           docker-compose pull
           docker-compose down
           docker-compose up -d
