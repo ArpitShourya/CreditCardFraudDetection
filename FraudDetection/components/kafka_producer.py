@@ -33,6 +33,24 @@ class KafkaProducerService:
             
             time.sleep(1)  # simulate real-time
 
+    def stream_dataframe(self, df):
+    
+        base_time = datetime.now()
+
+        for _, row in df.iterrows():
+            event_time = base_time + timedelta(seconds=row["Time"])
+
+            transaction = {
+                "event_time": event_time.isoformat(),
+                "Time": row["Time"],
+                "features": row.iloc[1:29].tolist(),
+                "Amount": row["Amount"]
+            }
+
+            self.producer.send(self.topic, value=transaction)
+            print(f"Sent: {transaction}")
+
+
 if __name__ == "__main__":
     producer = KafkaProducerService()
     producer.stream_data(r"E:\ETE FraudDetection Project\Data\creditcard.csv")

@@ -11,8 +11,8 @@ trainingpipelineconfig = TrainingPipelineConfig()
 model_trainer_config = ModelTrainerConfig(training_pipeline_config=trainingpipelineconfig)
 data_transformation_config = DataTransformationConfig(training_pipeline_config=trainingpipelineconfig)
 
-model = joblib.load(r"E:\ETE FraudDetection Project\Artifacts\04_17_2025_08_36_S\Model Trainer\Trained Model\Model.pkl")
-preprocessor = joblib.load(r"E:\ETE FraudDetection Project\Artifacts\04_17_2025_08_36_S\data_transformation\Preprocessing model\preprocessing.pkl")
+model = joblib.load("final_models/Model.pkl")
+preprocessor = joblib.load("final_models/preprocessing.pkl")
 fraud_model = FraudDetectionModel(model)
 
 # Faust app
@@ -51,7 +51,7 @@ async def detect_fraud(transactions):
             prediction = fraud_model.predict(df)[0]
             if prediction == 1:
                 print(f"🚨 FRAUD DETECTED: {tx}")
-                message = f"🚨 FRAUD ALERT!\nAmount: {tx.Amount} dollars \nTime : {tx.Time} seconds"
+                message = f"🚨 FRAUD ALERT!\n We have detected unusal transaction of Amount: {tx.Amount} Dollars which is taking unsual Time of : {tx.Time} seconds. \n Hence we have blocked your transaction."
                 send_email_alert("🚨 FRAUD DETECTED", message)
             else:
                 print(f"✅ Legit Transaction: {tx}")

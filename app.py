@@ -1,7 +1,9 @@
 import sys,os,certifi,pymongo,pandas as pd
 from FraudDetection.exception.exception import FraudDetectionException
 from FraudDetection.logging.logger import logging
+from FraudDetection.utils.ml_utils.model.estimator import FraudDetectionModel
 from FraudDetection.pipeline.training_pipeline import TrainingPipeline
+from FraudDetection.components.kafka_producer import KafkaProducerService
 from FraudDetection.constants.training_pipeline import (DATA_INGESTION_COLLECTION_NAME,
                                                         DATA_INGESTION_DATABASE_NAME)
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,6 +34,8 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+from fastapi.templating import Jinja2Templates
+templates=Jinja2Templates(directory="./templates")
 
 @app.get("/",tags=["authentication"])
 async def index():
@@ -42,6 +46,27 @@ async def train_route():
     try:
         train_pipeline=TrainingPipeline()
         train_pipeline.run_training_pipeline()
-        return Response("Training  is successful")
+        return Response("Training is successful")
     except Exception as e:
         raise FraudDetectionException(e,sys)
+    
+@app.get("/predict")
+async def predict_route(file:UploadFile=File(...)):
+    try:
+        df=pd.read_csv(file.file)
+        rows_to_scale=['Time','Amount']
+        preprocessor=load_object("final_models/preprocessing.pkl")
+        model=load_object("final_models/Model.pkl")
+        fraud_detection_model=FraudDetectionModel(model=model)
+        df[rows_to_scale]=preprocessor.transform(df[rows_to_scale])
+        y_pred=fraud_detection_model.predict(df)
+        df['predicted column']=y_pred
+        df.to_csv("Prediction_Data/output.csv")
+        kfpservice=KafkaProducerService()
+        kfpservice.stream_dataframe(df)
+        return Response("Output saved in folder Prediction Data")
+    except Exception as e:
+        raise FraudDetectionException(e,sys)
+    
+if __name__=="__main__":
+    app_run(app=app,host="localhost",port=8000)
