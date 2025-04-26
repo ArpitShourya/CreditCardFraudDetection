@@ -9,6 +9,7 @@ pyyaml
 imblearn
 xgboost
 mlflow
+python-multipart
 fastapi
 uvicorn
 kafka
