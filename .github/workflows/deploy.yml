@@ -1,0 +1,47 @@
+name: Deploy to AWS EC2 with ECR
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: ecr-login
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build and Push FastAPI Docker Image
+      run: |
+        docker build -f Dockerfile-fastapi -t ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_FASTAPI_REPOSITORY }}:latest .
+        docker push ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_FASTAPI_REPOSITORY }}:latest
+
+    - name: Build and Push Faust Docker Image
+      run: |
+        docker build -f Dockerfile-faust -t ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_FAUST_REPOSITORY }}:latest .
+        docker push ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_FAUST_REPOSITORY }}:latest
+
+    - name: SSH into EC2 and Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd /home/ubuntu/your-project-folder
+          git pull origin main
+          docker-compose pull
+          docker-compose down
+          docker-compose up -d
