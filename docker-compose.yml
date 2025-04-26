@@ -25,7 +25,7 @@ services:
   fastapi:
     image: ${AWS_ECR_LOGIN_URI}/${ECR_FASTAPI_REPOSITORY}:latest
     ports:
-      - "8080:8080"
+      - "8000:8000"
     depends_on:
       - kafka
     restart: always

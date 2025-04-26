@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY . .
 
 # Expose port 8080
-EXPOSE 8080
+EXPOSE 8000
 
 # Run the FastAPI app using python app.py
 CMD ["python", "app.py"]
