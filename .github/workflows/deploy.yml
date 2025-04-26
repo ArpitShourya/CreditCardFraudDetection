@@ -1,4 +1,4 @@
-name: Deploy to AWS EC2 with ECR Auto-Clone and Auto-Login
+name: Deploy to AWS EC2 with ECR Auto-Clone and Pre-Login
 
 on:
   push:
@@ -19,9 +19,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Login to Amazon ECR
-      id: ecr-login
-      uses: aws-actions/amazon-ecr-login@v1
+    - name: Login to Amazon ECR (important, outside SSH)
+      run: |
+        aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_LOGIN_URI }}
 
     - name: Build and Push FastAPI Docker Image
       run: |
@@ -43,26 +43,18 @@ jobs:
           cd /home/ubuntu
           if [ ! -d "CreditCardFraudDetection" ]; then
             echo "Repo not found! Cloning repository..."
-            git clone https://github.com/ArpitShourya/CreditCardFraudDetection.git
+            git clone https://github.com/your-username/CreditCardFraudDetection.git
           else
             echo "Repo already exists! Pulling latest changes..."
             cd CreditCardFraudDetection
             git pull origin main
           fi
           cd CreditCardFraudDetection
-
-          # Create .env file dynamically from GitHub Secrets
+          
           echo "AWS_ECR_LOGIN_URI=${{ secrets.AWS_ECR_LOGIN_URI }}" > .env
           echo "ECR_FASTAPI_REPOSITORY=${{ secrets.ECR_FASTAPI_REPOSITORY }}" >> .env
           echo "ECR_FAUST_REPOSITORY=${{ secrets.ECR_FAUST_REPOSITORY }}" >> .env
 
-          
-          #Login to ECR to pull private images
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_LOGIN_URI }}
-
-          # Pull latest docker images
           docker-compose pull
-
-          # Restart containers
           docker-compose down
           docker-compose up -d
