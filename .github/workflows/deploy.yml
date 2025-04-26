@@ -1,4 +1,4 @@
-name: Deploy to AWS EC2 with ECR Auto-Clone
+name: Deploy to AWS EC2 with ECR Auto-Clone and Auto-Login
 
 on:
   push:
@@ -55,6 +55,17 @@ jobs:
           echo "AWS_ECR_LOGIN_URI=${{ secrets.AWS_ECR_LOGIN_URI }}" > .env
           echo "ECR_FASTAPI_REPOSITORY=${{ secrets.ECR_FASTAPI_REPOSITORY }}" >> .env
           echo "ECR_FAUST_REPOSITORY=${{ secrets.ECR_FAUST_REPOSITORY }}" >> .env
+
+          # Install awscli if missing (Optional but safe)
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+          #Login to ECR to pull private images
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_LOGIN_URI }}
+
+          # Pull latest docker images
           docker-compose pull
+
+          # Restart containers
           docker-compose down
           docker-compose up -d
