@@ -12,7 +12,6 @@ mlflow
 python-multipart
 fastapi
 uvicorn
-kafka
-kafka-python
+kafka-python>=2.0.2
 faust-streaming
 #-e .
