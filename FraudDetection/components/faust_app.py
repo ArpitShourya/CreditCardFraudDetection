@@ -11,8 +11,8 @@ trainingpipelineconfig = TrainingPipelineConfig()
 model_trainer_config = ModelTrainerConfig(training_pipeline_config=trainingpipelineconfig)
 data_transformation_config = DataTransformationConfig(training_pipeline_config=trainingpipelineconfig)
 
-model = joblib.load("final_models/Model.pkl")
-preprocessor = joblib.load("final_models/preprocessing.pkl")
+model = joblib.load(r"E:\ETE FraudDetection Project\final_models\Model.pkl")
+preprocessor = joblib.load(r"E:\ETE FraudDetection Project\final_models\preprocessing.pkl")
 fraud_model = FraudDetectionModel(model)
 
 # Faust app
