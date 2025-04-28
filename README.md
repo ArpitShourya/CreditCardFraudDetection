@@ -1,5 +1,7 @@
-Real-Time Bank Transaction Fraud Detection 🚀
-🏷️ Badges
+# Real-Time Bank Transaction Fraud Detection 🚀
+
+## 🏷️ Badges
+
 ![Dockerized](https://img.shields.io/badge/Dockerized-Yes-blue?logo=docker)
 ![Real-Time Streaming](https://img.shields.io/badge/Streaming-Kafka%20%2B%20Faust-orange?logo=apache-kafka)
 ![FastAPI](https://img.shields.io/badge/API-FastAPI-0E7C61?logo=fastapi)
@@ -7,93 +9,107 @@ Real-Time Bank Transaction Fraud Detection 🚀
 ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-blue?logo=github-actions)
 ![Machine Learning](https://img.shields.io/badge/Model-Isolation%20Forest%20%2B%20XGBoost-brightgreen?logo=scikit-learn)
 
-📋 Project Overview
-Built an end-to-end Real-Time Bank Transaction Fraud Detection System using the Kaggle Credit Card Fraud Detection dataset.
-The system detects fraudulent transactions instantly, triggers email alerts, and is production-ready with containerization, real-time streaming, and cloud deployment.
+## 📋 Project Overview
 
-🏗️ Architecture
-MongoDB Atlas for transaction data storage.
+- Built an end-to-end Real-Time Bank Transaction Fraud Detection System using the Kaggle Credit Card Fraud Detection dataset.
+- The system detects fraudulent transactions instantly, triggers email alerts, and is production-ready with containerization, real-time streaming, and cloud deployment.
 
-Kafka Producer streams data to a Kafka Broker.
+## 🏗️ Architecture
 
-Faust App listens to the Kafka stream, predicts frauds, and labels transactions.
+- MongoDB Atlas for transaction data storage.
 
-FastAPI backend for model training and prediction through Swagger UI.
+- Kafka Producer streams data to a Kafka Broker.
 
-Email Alerts sent via Gmail SMTP for detected frauds.
+- Faust App listens to the Kafka stream, predicts frauds, and labels transactions.
 
-AWS S3 to store model artifacts.
+- FastAPI backend for model training and prediction through Swagger UI.
 
-Docker and Docker-Compose for containerization.
+- Email Alerts sent via Gmail SMTP for detected frauds.
 
-AWS ECR + EC2 for deployment via GitHub Actions CI/CD.
+- AWS S3 to store model artifacts.
 
-⚙️ Tech Stack
+- Docker and Docker-Compose for containerization.
 
-Category	Technologies
-Data Storage	MongoDB Atlas
-Machine Learning	Isolation Forest + XGBoost
-Backend	FastAPI
-Real-Time Streaming	Apache Kafka + Faust
-Email Alerts	Gmail SMTP
-Containerization	Docker + Docker-Compose
-Cloud Services	AWS S3, ECR, EC2
-CI/CD	GitHub Actions
-Deployment	AWS CLI
-📈 Model Details
-Hybrid model combining Isolation Forest (unsupervised anomaly detection) and XGBoost (supervised classification).
+- AWS ECR + EC2 for deployment via GitHub Actions CI/CD.
 
-Achieved 92% combined accuracy on the Kaggle Credit Card Fraud Detection dataset.
+## ⚙️ Tech Stack
 
-Pipeline-based architecture for clean training and prediction processes.
+|      Category        |         Technologies        |
+|----------------------|-----------------------------|
+| Data Storage         | MongoDB Atlas               |
+| Machine Learning     | Isolation Forest + XGBoost  |
+| Backend              | FastAPI                     |
+| Real-Time Streaming  | Apache Kafka + Faust        |
+| Email Alerts         | Gmail SMTP                  |
+| Containerization     | Docker + Docker-Compose     |
+| Cloud Services       | AWS S3, ECR, EC2            |
+| CI/CD                | GitHub Actions              |
+| Deployment           | AWS CLI                     |
 
-🔥 Real-Time Streaming Flow
-Kafka Producer sends transaction events.
+## 📈 Model Details
 
-Faust App consumes events, makes predictions, and classifies transactions.
+- Hybrid model combining Isolation Forest (unsupervised anomaly detection) and XGBoost (supervised classification).
 
-If fraud is detected, an instant email alert is triggered via SMTP.
+- Achieved 92% combined accuracy on the Kaggle Credit Card Fraud Detection dataset.
 
-🚀 Deployment Steps
-Upload trained models and artifacts to AWS S3 using AWS CLI.
+- Pipeline-based architecture for clean training and prediction processes.
 
-Build Docker images for FastAPI, Faust, and supporting services.
+## 🔥 Real-Time Streaming Flow
 
-Use Docker-Compose to orchestrate services locally or on EC2.
+- Kafka Producer sends transaction events.
 
-GitHub Actions (deploy.yml) automates:
+- Faust App consumes events, makes predictions, and classifies transactions.
 
-Docker image build.
+- If fraud is detected, an instant email alert is triggered via SMTP.
 
-Push to AWS ECR.
+## 🚀 Deployment Steps
 
-Deployment to AWS EC2.
+- Upload trained models and artifacts to AWS S3 using AWS CLI.
 
-🛡️ Key Features
-✅ Real-time fraud detection and notification.
+- Build Docker images for FastAPI, Faust, and supporting services.
 
-✅ Hybrid ML model with high accuracy.
+- Use Docker-Compose to orchestrate services locally or on EC2.
 
-✅ Fully containerized microservices.
+- GitHub Actions (deploy.yml) automates:
 
-✅ Automated cloud deployment using GitHub Actions.
+- Docker image build.
 
-✅ Modular and scalable architecture.
+- Push to AWS ECR.
 
-📚 Dataset
-Kaggle - Credit Card Fraud Detection Dataset
+- Deployment to AWS EC2.
 
-📩 Email Alert Example
-When fraud is detected, an automatic email alert is sent:
+## 🛡️ Key Features
 
+- ✅ Real-time fraud detection and notification.
+
+- ✅ Hybrid ML model with high accuracy.
+
+- ✅ Fully containerized microservices.
+
+- ✅ Automated cloud deployment using GitHub Actions.
+
+- ✅ Modular and scalable architecture.
+
+## 📚 Dataset
+
+- Kaggle - Credit Card Fraud Detection Dataset
+
+## 📩 Email Alert Example
+
+- When fraud is detected, an automatic email alert is sent:
+
+'''bash
 Subject: ⚠️ Fraud Alert Detected
 Body: Transaction ID [XYZ] flagged as FRAUD at [timestamp].
+'''
 
-🙌 Acknowledgements
-Inspired by real-world production needs for real-time ML systems.
+## 🙌 Acknowledgements
 
-Thanks to open-source communities of Kafka, FastAPI, Faust, and AWS for their excellent tools.
+- Inspired by real-world production needs for real-time ML systems.
 
-📌 Let's Connect!
-Interested in real-time Machine Learning, MLOps, or Cloud Engineering?
-Let’s connect and innovate together! 🚀
+- Thanks to open-source communities of Kafka, FastAPI, Faust, and AWS for their excellent tools.
+
+## 📌 Let's Connect!
+- Interested in real-time Machine Learning, MLOps, or Cloud Engineering?
+
+- Let’s connect and innovate together! 🚀
