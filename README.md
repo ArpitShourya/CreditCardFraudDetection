@@ -98,10 +98,10 @@
 
 - When fraud is detected, an automatic email alert is sent:
 
-'''bash
+```
 Subject: ⚠️ Fraud Alert Detected
 Body: Transaction ID [XYZ] flagged as FRAUD at [timestamp].
-'''
+```
 
 ## 🙌 Acknowledgements
 
